@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="logo.png">
+    <title>Aditya AI Photo Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <header>
+    <h2>🤖 Aditya AI Photo Generator</h2>
+    <button id="themeBtn">🌙 Dark Mode</button>
+</header>
+
+    <h1>Welcome to My AI Photo Generator</h1>
+    <p>Designed & Developed by Aditya</p>
+
+    <p>Turn your imagination into AI-generated art.</p>
+    <div class="controls">
+    <input
+  type="text"
+  id="prompt"
+  placeholder="Enter your image prompt..."
+>
+<select id="style">
+    <option value="">Realistic</option>
+    <option value="anime">Anime</option>
+    <option value="cartoon">Cartoon</option>
+    <option value="3d">3D</option>
+</select>
+<select id="size">
+    <option value="square">⬜ Square</option>
+    <option value="portrait">📱 Portrait</option>
+    <option value="landscape">🖥️ Landscape</option>
+</select>
+
+    <button id="generateBtn">Generate Image</button>
+    <button id="randomBtn">🎲 Random Prompt</button>
+    <button id="copyBtn">📋 Copy Prompt</button>
+    <button id="clearBtn">🗑️ Clear Image</button>
+    </div>
+    <div id="loader" style="display:none;">
+        <div class="spinner"></div>
+    <h3>⏳ Generating AI Image...</h3>
+</div>
+    <p id="status"></p>
+    <p id="imageCount">🖼️ Images Generated: 0</p>
+    <img id="outputImage" src="" alt="Generated Image">
+    <p id="promptText"></p>
+    <h3>🖼️ Image History</h3>
+<div id="history"></div>
+    <button id="downloadBtn">Download Image</button>
+    <script src="script.js"></script>
+
+<footer>
+    <p>© 2026 Aditya | AI Photo Generator</p>
+</footer>
+</div>
+</body>
+</html>

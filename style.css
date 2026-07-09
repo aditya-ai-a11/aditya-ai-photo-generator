@@ -1,0 +1,254 @@
+body{
+    background-color: #111827;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+}
+
+h1{
+    color: #00ffcc;
+    font-size: 45px;
+}
+
+p{
+    font-size: 20px;
+}
+
+button{
+    background-color: #00ffcc;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+button:hover{
+    background-color:#00bfff;
+    transform:scale(1.05);
+    transition:0.3s;
+    cursor:pointer;
+}
+input {
+    width: 500px;
+max-width: 90%;
+    width: 350px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+    outline: none;
+}
+#outputImage {
+    width: 400px;
+    margin-top: 30px;
+    border-radius: 15px;
+    display: none;
+}
+#status{
+    font-size:18px;
+    color:yellow;
+    margin-top:20px;
+}
+header{
+    width:100%;
+    background:#111;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:24px;
+    margin-bottom:30px;
+}
+#themeBtn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    padding:8px 15px;
+    font-size:16px;
+}
+button{
+    transition:0.3s;
+}
+
+input:focus{
+    box-shadow:0 0 15px #00ffcc;
+}
+
+img{
+    margin-top:20px;
+    border-radius:15px;
+    max-width:400px;
+}
+body.light{
+    background:white;
+    color:black;
+}
+#loader {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ffd5;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.3;
+    }
+}
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    background: #111;
+    color: white;
+    font-size: 16px;
+}
+
+footer p {
+    margin: 0;
+}
+button {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+#outputImage {
+    display: none;
+    width: 400px;
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border: 3px solid #4f46e5;
+}
+#outputImage {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#outputImage:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+#history {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#history img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #4f46e5;
+    transition: 0.3s;
+}
+
+#history img:hover {
+    transform: scale(1.1);
+}
+#history {
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+#promptText {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    color: #00ffd5;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+select {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 2px solid #4f46e5;
+    font-size: 16px;
+    cursor: pointer;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width:1200px;
+    margin-top: 20px auto;
+}
+#prompt {
+    width: 420px;
+}
+
+.controls button {
+    white-space: nowrap;
+}
+.controls button {
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.controls button:hover {
+    transform: translateY(-3px);
+}
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #00e5ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 15px auto;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.container {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+body {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #312e81);
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    color: white;
+    text-align: center;
+}
+.spinner {
+    display: none;
+}
