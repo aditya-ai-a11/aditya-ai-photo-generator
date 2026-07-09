@@ -29,7 +29,7 @@ button.innerText = "Generating...";
     document.getElementById("loader").style.display = "block";
     document.querySelector(".spinner").style.display = "block";
 
-    const response = await fetch("http://localhost:3000/generate", {
+    const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
