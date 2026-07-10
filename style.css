@@ -239,16 +239,36 @@ select {
     margin: 30px auto;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
-body {
-    background: linear-gradient(135deg, #0f172a, #1e3a8a, #312e81);
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-.container {
-    color: white;
-    text-align: center;
-}
+
+
 .spinner {
     display: none;
+}
+@media (max-width: 768px){
+
+    h1{
+        font-size:32px;
+    }
+
+    #prompt{
+        width:95%;
+    }
+
+    .controls{
+        flex-direction:column;
+    }
+
+    button,
+    select{
+        width:95%;
+    }
+
+    #outputImage{
+        width:95%;
+    }
+
+    #history img{
+        width:80px;
+        height:80px;
+    }
 }

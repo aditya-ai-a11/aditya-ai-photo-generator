@@ -58,6 +58,8 @@ document.querySelector(".spinner").style.display = "none";
 button.disabled = false;
 button.innerText = "Generate Image";
 status.innerText = "Image Generated!";
+imageCount++;
+imageCountText.innerText = imageCount;
 document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
 });
 
