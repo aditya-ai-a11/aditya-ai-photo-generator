@@ -67,7 +67,7 @@ document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
 downloadBtn.addEventListener("click", function () {
     const link = document.createElement("a");
     link.href = outputImage.src;
-    link.download = "image.jpg";
+    link.download = `AI-Image-${Date.now()}.png`;
     link.click();
 });
 
