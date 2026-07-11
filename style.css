@@ -125,6 +125,7 @@ button {
 
 button:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(79,70,229,0.6);
 }
 #outputImage {
     display: none;
@@ -271,4 +272,12 @@ select {
         width:80px;
         height:80px;
     }
+}
+.container{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0,255,204,0.25);
 }
