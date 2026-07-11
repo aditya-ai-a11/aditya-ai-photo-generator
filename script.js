@@ -1,4 +1,5 @@
-const clearBtn = document.getElementById("clearBtn");
+const progressContainer = document.getElementById("progressContainer");
+const progressBar = document.getElementById("progressBar");const clearBtn = document.getElementById("clearBtn");
 const style = document.getElementById("style");
 const size = document.getElementById("size");
 const button = document.getElementById("generateBtn");
@@ -28,6 +29,8 @@ button.addEventListener("click", async function () {
 button.innerText = "Generating...";
     document.getElementById("loader").style.display = "block";
     document.querySelector(".spinner").style.display = "block";
+    progressContainer.style.display = "block";
+progressBar.style.width = "10%";
 
     const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
         method: "POST",
@@ -40,6 +43,7 @@ button.innerText = "Generating...";
     });
 
     const imageBlob = await response.blob();
+    progressBar.style.width = "100%";
 
 outputImage.src = URL.createObjectURL(imageBlob);
 const history = document.getElementById("history");
@@ -58,6 +62,10 @@ document.querySelector(".spinner").style.display = "none";
 button.disabled = false;
 button.innerText = "Generate Image";
 status.innerText = "Image Generated!";
+setTimeout(() => {
+    progressContainer.style.display = "none";
+    progressBar.style.width = "0%";
+}, 500);
 imageCount++;
 imageCountText.innerText = imageCount;
 document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
