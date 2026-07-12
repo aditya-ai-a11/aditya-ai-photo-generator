@@ -1,3 +1,10 @@
+import { auth } from "./firebase.js";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged
+} from "firebase/auth";
 const progressContainer = document.getElementById("progressContainer");
 const progressBar = document.getElementById("progressBar");const clearBtn = document.getElementById("clearBtn");
 const style = document.getElementById("style");
@@ -150,5 +157,32 @@ copyBtn.addEventListener("click", function () {
 promptInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         button.click();
+    }
+});
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+const provider = new GoogleAuthProvider();
+
+loginBtn.addEventListener("click", async () => {
+    try {
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+});
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        loginBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+        alert("Welcome " + user.displayName);
+    } else {
+        loginBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
     }
 });
