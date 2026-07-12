@@ -281,3 +281,20 @@ select {
     transform: translateY(-8px);
     box-shadow: 0 20px 45px rgba(0,255,204,0.25);
 }
+#progressContainer{
+    width:80%;
+    max-width:500px;
+    height:12px;
+    background:#333;
+    border-radius:20px;
+    margin:15px auto;
+    overflow:hidden;
+    display:none;
+}
+
+#progressBar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#00e5ff,#7c3aed);
+    transition:width 0.3s;
+}

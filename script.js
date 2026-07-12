@@ -25,6 +25,17 @@ button.addEventListener("click", async function () {
     }
 
     status.innerText = "Generating image...";
+    progressContainer.style.display = "block";
+progressBar.style.width = "10%";
+
+let progress = 10;
+
+const progressInterval = setInterval(() => {
+    if (progress < 90) {
+        progress += 10;
+        progressBar.style.width = progress + "%";
+    }
+}, 300);
     button.disabled = true;
 button.innerText = "Generating...";
     document.getElementById("loader").style.display = "block";
@@ -43,6 +54,13 @@ progressBar.style.width = "10%";
     });
 
     const imageBlob = await response.blob();
+    clearInterval(progressInterval);
+progressBar.style.width = "100%";
+
+setTimeout(() => {
+    progressContainer.style.display = "none";
+    progressBar.style.width = "0%";
+}, 500);
     progressBar.style.width = "100%";
 
 outputImage.src = URL.createObjectURL(imageBlob);
