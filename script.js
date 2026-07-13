@@ -4,7 +4,7 @@ import {
   signInWithPopup,
   signOut,
   onAuthStateChanged
-} from "firebase/auth";
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 const progressContainer = document.getElementById("progressContainer");
 const progressBar = document.getElementById("progressBar");const clearBtn = document.getElementById("clearBtn");
 const style = document.getElementById("style");
