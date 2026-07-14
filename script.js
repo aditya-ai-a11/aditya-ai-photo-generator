@@ -180,8 +180,15 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
+        document.getElementById("userProfile").style.display = "block";
+document.getElementById("userName").innerText = user.displayName;
+document.getElementById("userPhoto").src = user.photoURL;
+
+        document.getElementById("userName").innerText = user.displayName;
+document.getElementById("userPhoto").src = user.photoURL;
         alert("Welcome " + user.displayName);
     } else {
+        document.getElementById("userProfile").style.display = "none";
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
     }
