@@ -195,7 +195,7 @@ logoutBtn.addEventListener("click", async () => {
     await signOut(auth);
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
@@ -206,32 +206,8 @@ document.getElementById("userPhoto").src = user.photoURL;
         document.getElementById("userName").innerText = user.displayName;
 document.getElementById("userPhoto").src = user.photoURL;
         alert("Welcome " + user.displayName);
-        const history = document.getElementById("history");
-history.innerHTML = "";
+        
 
-const q = query(
-    collection(db, "images"),
-    where("user", "==", user.email)
-);
-
-const querySnapshot = await getDocs(q);
-
-querySnapshot.forEach((doc) => {
-    const data = doc.data();
-
-    const img = document.createElement("img");
-    img.src = data.imageUrl;
-    img.width = 120;
-    img.style.margin = "5px";
-
-    img.addEventListener("click", () => {
-        outputImage.src = data.imageUrl;
-        document.getElementById("promptText").innerText =
-            "📝 Prompt: " + data.prompt;
-    });
-
-    history.prepend(img);
-});
     } else {
         document.getElementById("userProfile").style.display = "none";
         loginBtn.style.display = "inline-block";
