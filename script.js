@@ -101,10 +101,11 @@ imageCountText.innerText = imageCount;
 document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
 try {
     await addDoc(collection(db, "images"), {
-        user: auth.currentUser.email,
-        prompt: finalPrompt,
-        createdAt: serverTimestamp()
-    });
+    user: auth.currentUser.email,
+    prompt: finalPrompt,
+    imageUrl: outputImage.src,
+    createdAt: serverTimestamp()
+});
     console.log("Image history saved!");
 } catch (e) {
     console.error("Error saving history:", e);
