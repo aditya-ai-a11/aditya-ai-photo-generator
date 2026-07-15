@@ -109,6 +109,7 @@ try {
 } catch (e) {
     console.error("Error saving history:", e);
 }
+});
 
 // Download Image
 downloadBtn.addEventListener("click", function () {
