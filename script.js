@@ -111,6 +111,7 @@ try {
     createdAt: serverTimestamp()
 });
     console.log("Image history saved!");
+    await loadHistory();
 } catch (e) {
     console.error("Error saving history:", e);
 }
