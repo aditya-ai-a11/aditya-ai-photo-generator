@@ -1,4 +1,5 @@
 import { auth, db } from "./firebase.js";
+import { loadHistory } from "./history.js";
 import {
   collection,
   addDoc,
@@ -206,6 +207,7 @@ document.getElementById("userPhoto").src = user.photoURL;
         document.getElementById("userName").innerText = user.displayName;
 document.getElementById("userPhoto").src = user.photoURL;
         alert("Welcome " + user.displayName);
+        await loadHistory();
         
 
     } else {
