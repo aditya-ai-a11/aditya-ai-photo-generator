@@ -1,5 +1,5 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
 const app = express();
 
@@ -24,7 +24,6 @@ app.post("/generate", async (req, res) => {
 
         res.set("Content-Type", "image/png");
         res.send(Buffer.from(imageBuffer));
-
     } catch (error) {
         console.error(error);
         res.status(500).send("Error generating image");
@@ -35,8 +34,8 @@ app.get("/", (req, res) => {
     res.send("AI Photo Generator Server Running...");
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
