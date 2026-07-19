@@ -69,17 +69,9 @@ progressBar.style.width = "10%";
         })
     });
 
-    const imageBlob = await response.blob();
-    clearInterval(progressInterval);
-progressBar.style.width = "100%";
+  const data = await response.json();
 
-setTimeout(() => {
-    progressContainer.style.display = "none";
-    progressBar.style.width = "0%";
-}, 500);
-    progressBar.style.width = "100%";
-
-outputImage.src = URL.createObjectURL(imageBlob);
+outputImage.src = data.imageUrl;
 const history = document.getElementById("history");
 
 const img = document.createElement("img");

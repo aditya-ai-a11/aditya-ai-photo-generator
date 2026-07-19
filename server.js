@@ -32,9 +32,20 @@ app.post("/generate", async (req, res) => {
     }
 
     const imageBuffer = await response.arrayBuffer();
+    const base64Image = Buffer.from(imageBuffer).toString("base64");
 
-    res.set("Content-Type", "image/png");
-    res.send(Buffer.from(imageBuffer));
+const uploadResult = await cloudinary.uploader.upload(
+  `data:image/png;base64,${base64Image}`,
+  {
+    folder: "Aditya Ai",
+  }
+);
+
+console.log(uploadResult.secure_url);
+
+    res.json({
+  imageUrl: uploadResult.secure_url,
+});
   } catch (error) {
     console.error(error);
     res.status(500).send("Error generating image");
