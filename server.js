@@ -46,7 +46,7 @@ console.log(uploadResult.secure_url);
     res.json({
   imageUrl: uploadResult.secure_url,
 });
-  catch (error) {
+}catch (error) {
   console.error("FULL ERROR:", error);
   res.status(500).json({
     error: error.message,
