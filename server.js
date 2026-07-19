@@ -1,7 +1,7 @@
-import { v2 as cloudinary } from "cloudinary";
-import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
 
@@ -16,42 +16,46 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Image Generate
+// Generate Image
 app.post("/generate", async (req, res) => {
-  const { prompt } = req.body;
-
-  console.log("Prompt:", prompt);
-
   try {
+    const { prompt } = req.body;
+
+    console.log("Prompt:", prompt);
+
     const response = await fetch(
       `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`
     );
 
     if (!response.ok) {
-      return res.status(500).send("Error generating image");
+      return res.status(500).json({
+        error: "Failed to generate image",
+      });
     }
 
     const imageBuffer = await response.arrayBuffer();
     const base64Image = Buffer.from(imageBuffer).toString("base64");
 
-const uploadResult = await cloudinary.uploader.upload(
-  `data:image/png;base64,${base64Image}`,
-  {
-    folder: "Aditya Ai",
+    const uploadResult = await cloudinary.uploader.upload(
+      `data:image/png;base64,${base64Image}`,
+      {
+        folder: "Aditya Ai",
+      }
+    );
+
+    console.log(uploadResult.secure_url);
+
+    return res.json({
+      imageUrl: uploadResult.secure_url,
+    });
+
+  } catch (error) {
+    console.error("FULL ERROR:", error);
+
+    return res.status(500).json({
+      error: error.message,
+    });
   }
-);
-
-console.log(uploadResult.secure_url);
-
-    res.json({
-  imageUrl: uploadResult.secure_url,
-});
-}catch (error) {
-  console.error("FULL ERROR:", error);
-  res.status(500).json({
-    error: error.message,
-    stack: error.stack
-  });
 });
 
 // Cloudinary Test
