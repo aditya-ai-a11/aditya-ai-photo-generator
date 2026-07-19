@@ -52,7 +52,7 @@ console.log(uploadResult.secure_url);
     error: error.message,
     stack: error.stack
   });
-}
+});
 
 // Cloudinary Test
 app.get("/cloudinary-test", (req, res) => {
