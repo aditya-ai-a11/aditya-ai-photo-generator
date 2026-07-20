@@ -23,43 +23,15 @@ app.post("/generate", async (req, res) => {
 
     console.log("Prompt:", prompt);
 
-    const response = await fetch(
-      `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`
-    );
-
-    if (!response.ok) {
-      return res.status(500).json({
-        error: "Failed to generate image",
-      });
-    }
-
-    const imageBuffer = await response.arrayBuffer();
-    const base64Image = Buffer.from(imageBuffer).toString("base64");
-
-console.log("Uploading to Cloudinary...");
-
-const uploadResult = await cloudinary.uploader.upload(
-  `data:image/png;base64,${base64Image}`,
-  {
-    folder: "Aditya Ai",
-  }
-);
-
-console.log("Upload Success:", uploadResult);
-  
-
-    console.log(uploadResult.secure_url);
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
 
     return res.json({
-      imageUrl: uploadResult.secure_url,
+      imageUrl
     });
 
-  } catch (error) {
-    console.error("FULL ERROR:", error);
-
-    return res.status(500).json({
-      error: error.message,
-    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
 });
 
