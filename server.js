@@ -36,14 +36,17 @@ app.post("/generate", async (req, res) => {
     const imageBuffer = await response.arrayBuffer();
     const base64Image = Buffer.from(imageBuffer).toString("base64");
 
-    console.log("Uploading to Cloudinary...");
-    const uploadResult = await cloudinary.uploader.upload(
-        console.log("Upload Success:", uploadResult);
-      `data:image/png;base64,${base64Image}`,
-      {
-        folder: "Aditya Ai",
-      }
-    );
+console.log("Uploading to Cloudinary...");
+
+const uploadResult = await cloudinary.uploader.upload(
+  `data:image/png;base64,${base64Image}`,
+  {
+    folder: "Aditya Ai",
+  }
+);
+
+console.log("Upload Success:", uploadResult);
+  
 
     console.log(uploadResult.secure_url);
 

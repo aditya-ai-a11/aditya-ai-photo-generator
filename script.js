@@ -59,17 +59,24 @@ button.innerText = "Generating...";
     progressContainer.style.display = "block";
 progressBar.style.width = "10%";
 
-    const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            prompt: finalPrompt
-        })
-    });
+  const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        prompt: finalPrompt
+    })
+});
 
-  const data = await response.json();
+if (!response.ok) {
+    const error = await response.text();
+    alert(error);
+    console.log(error);
+    return;
+}
+
+const data = await response.json();
 
 outputImage.src = data.imageUrl;
 const history = document.getElementById("history");
