@@ -78,6 +78,10 @@ if (!response.ok) {
 
 const data = await response.json();
 
+console.log(data);
+console.log(data.imageUrl);
+alert(data.imageUrl);
+
 outputImage.src = data.imageUrl;
 const history = document.getElementById("history");
 
