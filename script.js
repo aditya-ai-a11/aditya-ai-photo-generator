@@ -1,3 +1,4 @@
+alert("SCRIPT LOADED");
 import { auth, db } from "./firebase.js";
 import { loadHistory } from "./history.js";
 import {
