@@ -1,4 +1,4 @@
-alert("SCRIPT LOADED");
+
 import { auth, db } from "./firebase.js";
 import { loadHistory } from "./history.js";
 import {
@@ -78,12 +78,23 @@ if (!response.ok) {
 }
 
 const data = await response.json();
+console.log("Response =", data);
+console.log("Image URL =", data.imageUrl);
+
 
 console.log(data);
 console.log(data.imageUrl);
-alert(data.imageUrl);
 
 outputImage.src = data.imageUrl;
+outputImage.onload = function () {
+    console.log("✅ IMAGE LOADED");
+    alert("IMAGE LOADED");
+};
+
+outputImage.onerror = function () {
+    console.log("❌ IMAGE FAILED");
+    alert("IMAGE FAILED");
+};
 const history = document.getElementById("history");
 
 const img = document.createElement("img");
@@ -107,19 +118,35 @@ setTimeout(() => {
 imageCount++;
 imageCountText.innerText = imageCount;
 document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
+if (!auth.currentUser) {
+    console.log("User not logged in");
+    return;
+}
 try {
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please login first!");
+        return;
+    }
+
     await addDoc(collection(db, "images"), {
-    user: auth.currentUser.email,
-    prompt: finalPrompt,
-    imageUrl: outputImage.src,
-    createdAt: serverTimestamp()
-});
+        user: user.email,
+        prompt: finalPrompt,
+        imageUrl: outputImage.src,
+        createdAt: serverTimestamp()
+    });
+
     console.log("Image history saved!");
     await loadHistory();
+
 } catch (e) {
     console.error("Error saving history:", e);
 }
+
 });
+
+    
 
 // Download Image
 downloadBtn.addEventListener("click", function () {
@@ -206,8 +233,7 @@ onAuthStateChanged(auth, async (user) => {
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
         document.getElementById("userProfile").style.display = "block";
-document.getElementById("userName").innerText = user.displayName;
-document.getElementById("userPhoto").src = user.photoURL;
+
 
         document.getElementById("userName").innerText = user.displayName;
 document.getElementById("userPhoto").src = user.photoURL;
