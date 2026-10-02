@@ -22,7 +22,7 @@ app.post("/generate", async (req, res) => {
     console.log("Prompt:", prompt);
 
     const imageUrl =
-      'https://aditya-ai-photo-generator.onrender.com/image?prompt=${encodeURIComponent(prompt)}';
+      `https://aditya-ai-photo-generator.onrender.com/image?prompt=${encodeURIComponent(prompt)}`;
 
     return res.json({
       imageUrl
