@@ -1,19 +1,18 @@
-
 import { auth, db } from "./firebase.js";
 import { loadHistory } from "./history.js";
 import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  query,
-  where,
-  getDocs
+collection,
+addDoc,
+serverTimestamp,
+query,
+where,
+getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged
+GoogleAuthProvider,
+signInWithPopup,
+signOut,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 const progressContainer = document.getElementById("progressContainer");
 const progressBar = document.getElementById("progressBar");const clearBtn = document.getElementById("clearBtn");
@@ -33,67 +32,67 @@ const themeBtn = document.getElementById("themeBtn");
 // Generate Image
 button.addEventListener("click", async function () {
 
-    const prompt = promptInput.value;
-    const finalPrompt = `${prompt}, ${style.value}, ${size.value}`;
+const prompt = promptInput.value;  
+const finalPrompt ='${prompt}, ${style.value}, ${size.value}';  
 
-    if (prompt === "") {
-        alert("Please enter a prompt!");
-        return;
-    }
+if (prompt === "") {  
+    alert("Please enter a prompt!");  
+    return;  
+}  
 
-    status.innerText = "Generating image...";
-    progressContainer.style.display = "block";
+status.innerText = "Generating image...";  
+progressContainer.style.display = "block";
+
 progressBar.style.width = "10%";
 
 let progress = 10;
 
 const progressInterval = setInterval(() => {
-    if (progress < 90) {
-        progress += 10;
-        progressBar.style.width = progress + "%";
-    }
+if (progress < 90) {
+progress += 10;
+progressBar.style.width = progress + "%";
+}
 }, 300);
-    button.disabled = true;
+button.disabled = true;
 button.innerText = "Generating...";
-    document.getElementById("loader").style.display = "block";
-    document.querySelector(".spinner").style.display = "block";
-    progressContainer.style.display = "block";
+document.getElementById("loader").style.display = "block";
+document.querySelector(".spinner").style.display = "block";
+progressContainer.style.display = "block";
 progressBar.style.width = "10%";
 
-  const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        prompt: finalPrompt
-    })
+const response = await fetch("https://aditya-ai-photo-generator.onrender.com/generate", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+prompt: finalPrompt
+})
 });
 
 if (!response.ok) {
-    const error = await response.text();
-    alert(error);
-    console.log(error);
-    return;
+const error = await response.text();
+alert(error);
+console.log(error);
+return;
 }
 
 const data = await response.json();
 console.log("Response =", data);
 console.log("Image URL =", data.imageUrl);
 
-
 console.log(data);
 console.log(data.imageUrl);
 
 outputImage.src = data.imageUrl;
 outputImage.onload = function () {
-    console.log("✅ IMAGE LOADED");
-    alert("IMAGE LOADED");
+console.log("✅ IMAGE LOADED");
+alert("IMAGE LOADED");
 };
 
 outputImage.onerror = function () {
-    console.log("❌ IMAGE FAILED");
-    alert("IMAGE FAILED");
+console.log("❌ IMAGE FAILED");
+alert("IMAGE FAILED");
 };
 const history = document.getElementById("history");
 
@@ -101,7 +100,7 @@ const img = document.createElement("img");
 img.src = outputImage.src;
 history.prepend(img);
 img.addEventListener("click", function () {
-    outputImage.src = img.src;
+outputImage.src = img.src;
 });
 outputImage.style.display = "block";
 
@@ -112,104 +111,105 @@ button.disabled = false;
 button.innerText = "Generate Image";
 status.innerText = "Image Generated!";
 setTimeout(() => {
-    progressContainer.style.display = "none";
-    progressBar.style.width = "0%";
+progressContainer.style.display = "none";
+progressBar.style.width = "0%";
 }, 500);
 imageCount++;
 imageCountText.innerText = imageCount;
 document.getElementById("promptText").innerText = "📝 Prompt: " + finalPrompt;
 if (!auth.currentUser) {
-    console.log("User not logged in");
-    return;
+console.log("User not logged in");
+return;
 }
 try {
-    const user = auth.currentUser;
+const user = auth.currentUser;
 
-    if (!user) {
-        alert("Please login first!");
-        return;
-    }
+if (!user) {  
+    alert("Please login first!");  
+    return;  
+}  
 
-    await addDoc(collection(db, "images"), {
-        user: user.email,
-        prompt: finalPrompt,
-        imageUrl: outputImage.src,
-        createdAt: serverTimestamp()
-    });
+await addDoc(collection(db, "images"), {  
+    user: user.email,  
+    prompt: finalPrompt,  
+    imageUrl: outputImage.src,  
+    createdAt: serverTimestamp()  
+});  
 
-    console.log("Image history saved!");
-    await loadHistory();
+console.log("Image history saved!");  
+await loadHistory();
 
 } catch (e) {
-    console.error("Error saving history:", e);
+console.error("Error saving history:", e);
 }
 
 });
 
-    
-
 // Download Image
 downloadBtn.addEventListener("click", function () {
-    const link = document.createElement("a");
-    link.href = outputImage.src;
-    link.download = `AI-Image-${Date.now()}.png`;
-    link.click();
+const link = document.createElement("a");
+link.href = outputImage.src;
+link.download = AI-Image-${Date.now()}.png;
+link.click();
 });
 
 // Dark / Light Mode
 themeBtn.addEventListener("click", function () {
-    document.body.classList.toggle("dark");
+document.body.classList.toggle("dark");
 
-    if (document.body.classList.contains("dark")) {
-        themeBtn.innerText = "☀️ Light Mode";
-    } else {
-        themeBtn.innerText = "🌙 Dark Mode";
-    }
+if (document.body.classList.contains("dark")) {  
+    themeBtn.innerText = "☀️ Light Mode";  
+} else {  
+    themeBtn.innerText = "🌙 Dark Mode";  
+}
+
 });
 clearBtn.addEventListener("click", function () {
-    outputImage.src = "";
-    outputImage.style.display = "none";
+outputImage.src = "";
+outputImage.style.display = "none";
 
-    status.innerText = "";
+status.innerText = "";  
 
-    downloadBtn.style.display = "none";
+downloadBtn.style.display = "none";
+
 });
 outputImage.addEventListener("click", function () {
-    if (outputImage.requestFullscreen) {
-        outputImage.requestFullscreen();
-    }
+if (outputImage.requestFullscreen) {
+outputImage.requestFullscreen();
+}
 });
 const prompts = [
-    "A cute white cat",
-    "A futuristic sports car",
-    "A cyberpunk city at night",
-    "A fantasy castle",
-    "A dragon flying in the sky",
-    "A lion wearing sunglasses",
-    "An astronaut on the moon",
-    "A beautiful waterfall",
-    "A samurai in anime style",
-    "A robot playing guitar"
+"A cute white cat",
+"A futuristic sports car",
+"A cyberpunk city at night",
+"A fantasy castle",
+"A dragon flying in the sky",
+"A lion wearing sunglasses",
+"An astronaut on the moon",
+"A beautiful waterfall",
+"A samurai in anime style",
+"A robot playing guitar"
 ];
 
 randomBtn.addEventListener("click", function () {
-    const random = prompts[Math.floor(Math.random() * prompts.length)];
-    promptInput.value = random;
+const random = prompts[Math.floor(Math.random() * prompts.length)];
+promptInput.value = random;
 });
 copyBtn.addEventListener("click", function () {
-    navigator.clipboard.writeText(promptInput.value);
+navigator.clipboard.writeText(promptInput.value);
 
-    copyBtn.innerText = "✅ Copied!";
+copyBtn.innerText = "✅ Copied!";  
 
-    setTimeout(() => {
-        copyBtn.innerText = "📋 Copy Prompt";
-    }, 2000);
+setTimeout(() => {  
+    copyBtn.innerText = "📋 Copy Prompt";  
+}, 2000);
+
 });
 
 promptInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        button.click();
-    }
+if (event.key === "Enter") {
+button.click();
+}
 });
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
@@ -217,33 +217,33 @@ const logoutBtn = document.getElementById("logoutBtn");
 const provider = new GoogleAuthProvider();
 
 loginBtn.addEventListener("click", async () => {
-    try {
-        await signInWithPopup(auth, provider);
-    } catch (error) {
-        alert(error.message);
-    }
+try {
+await signInWithPopup(auth, provider);
+} catch (error) {
+alert(error.message);
+}
 });
 
 logoutBtn.addEventListener("click", async () => {
-    await signOut(auth);
+await signOut(auth);
 });
 
 onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        loginBtn.style.display = "none";
-        logoutBtn.style.display = "inline-block";
-        document.getElementById("userProfile").style.display = "block";
+if (user) {
+loginBtn.style.display = "none";
+logoutBtn.style.display = "inline-block";
+document.getElementById("userProfile").style.display = "block";
 
+document.getElementById("userName").innerText = user.displayName;
 
-        document.getElementById("userName").innerText = user.displayName;
 document.getElementById("userPhoto").src = user.photoURL;
-        alert("Welcome " + user.displayName);
-        await loadHistory();
-        
+alert("Welcome " + user.displayName);
+await loadHistory();
 
-    } else {
-        document.getElementById("userProfile").style.display = "none";
-        loginBtn.style.display = "inline-block";
-        logoutBtn.style.display = "none";
-    }
+} else {  
+    document.getElementById("userProfile").style.display = "none";  
+    loginBtn.style.display = "inline-block";  
+    logoutBtn.style.display = "none";  
+}
+
 });

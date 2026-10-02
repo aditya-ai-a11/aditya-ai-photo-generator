@@ -22,7 +22,7 @@ app.post("/generate", async (req, res) => {
     console.log("Prompt:", prompt);
 
     const imageUrl =
-      'https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux&key=${process.env.POLLINATIONS_API_KEY}';
+      'https://aditya-ai-photo-generator.onrender.com/image?prompt=${encodeURIComponent(prompt)}';
 
     return res.json({
       imageUrl
@@ -34,6 +34,43 @@ app.post("/generate", async (req, res) => {
     return res.status(500).json({
       error: err.message
     });
+  }
+});
+
+app.get("/image", async (req, res) => {
+  try {
+    const { prompt } = req.query;
+
+    if (!prompt) {
+      return res.status(400).send("Prompt is required");
+    }
+
+    const pollinationsUrl =
+      'https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux';
+
+    const response = await fetch(pollinationsUrl, {
+      headers: {
+        Authorization: 'Bearer ${process.env.POLLINATIONS_API_KEY}'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Pollinations error: ${response.status}');
+    }
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    res.set(
+      "Content-Type",
+      response.headers.get("content-type") || "image/jpeg"
+    );
+
+    res.send(buffer);
+
+  } catch (err) {
+    console.error("Image Error:", err);
+
+    res.status(500).send("Image generation failed");
   }
 });
 
