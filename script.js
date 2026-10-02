@@ -43,7 +43,7 @@ button.addEventListener("click", async function () {
 
   const prompt = promptInput.value.trim();
 
-  const finalPrompt = '${prompt}, ${style.value}, ${size.value}';
+  const finalPrompt = `${prompt}, ${style.value}, ${size.value}`;
 
   if (prompt === "") {
     alert("Please enter a prompt!");

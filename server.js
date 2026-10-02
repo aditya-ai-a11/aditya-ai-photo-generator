@@ -55,7 +55,7 @@ app.get("/image", async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error('Pollinations error: ${response.status}');
+      throw new Error(`Pollinations error: ${response.status}`);
     }
 
     const buffer = Buffer.from(await response.arrayBuffer());
@@ -81,5 +81,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log('Server running on port ${PORT}');
+  console.log(`Server running on port ${PORT}`);
 });
