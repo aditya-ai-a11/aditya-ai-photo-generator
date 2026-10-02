@@ -46,11 +46,11 @@ app.get("/image", async (req, res) => {
     }
 
     const pollinationsUrl =
-      'https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux';
+      `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux`;
 
     const response = await fetch(pollinationsUrl, {
       headers: {
-        Authorization: 'Bearer ${process.env.POLLINATIONS_API_KEY}'
+        Authorization: `Bearer ${process.env.POLLINATIONS_API_KEY}`
       }
     });
 
