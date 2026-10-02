@@ -22,7 +22,7 @@ app.post("/generate", async (req, res) => {
     console.log("Prompt:", prompt);
 
     const imageUrl =
-      https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)};
+      'https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}';
 
     return res.json({
       imageUrl
@@ -44,5 +44,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(Server running on port ${PORT});
+  console.log('Server running on port ${PORT}');
 });
