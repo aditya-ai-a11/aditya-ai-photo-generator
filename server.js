@@ -63,11 +63,15 @@ app.post("/generate", async (req, res) => {
       imageUrl: uploadResult.secure_url
     });
 
-  } catch (err) {
-    console.error("Generate Error:", err);
+} catch (err) {
+  console.error("Generate Error:", err);
 
-    return res.status(500).json({
-      error: err.message
+  return res.status(500).json({
+    error: err.message,
+    http_code: err.http_code || null,
+    details: err.error?.message || null
+  });
+}
     });
   }
 });
