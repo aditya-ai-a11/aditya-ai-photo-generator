@@ -22,7 +22,7 @@ app.post("/generate", async (req, res) => {
     console.log("Prompt:", prompt);
 
     const imageUrl =
-      'https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}';
+      'https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=flux&key=${process.env.POLLINATIONS_API_KEY}';
 
     return res.json({
       imageUrl
