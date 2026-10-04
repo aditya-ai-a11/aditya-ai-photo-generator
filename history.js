@@ -40,6 +40,20 @@ export async function loadHistory() {
     img.style.margin = "5px";
     img.style.objectFit = "cover";
     img.style.cursor = "pointer";
+    const favoriteBtn = document.createElement("button");
+
+favoriteBtn.innerText = "⭐ Favorite";
+
+favoriteBtn.style.display = "block";
+favoriteBtn.style.margin = "5px auto";
+favoriteBtn.style.padding = "7px 12px";
+favoriteBtn.style.border = "none";
+favoriteBtn.style.borderRadius = "8px";
+favoriteBtn.style.cursor = "pointer";
+
+favoriteBtn.addEventListener("click", () => {
+    favoriteBtn.innerText = "⭐ Favorited!";
+});
     const downloadBtn = document.createElement("button");
 
 downloadBtn.innerText = "⬇️ Download";
@@ -64,7 +78,8 @@ downloadBtn.addEventListener("click", () => {
       outputImage.src = data.imageUrl;
       outputImage.style.display = "block";
     });
-
+history.appendChild(favoriteBtn);
+history.appendChild(downloadBtn);
     history.prepend(img);
   });
 }
