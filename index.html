@@ -2,12 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png">
     <title>Aditya AI Photo Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainContainer">
 <header>
     <button id="loginBtn">🔑 Login with Google</button>
     <button id="logoutBtn" style="display:none;">🚪 Logout</button>
@@ -22,6 +23,31 @@
 </header>
 
     <h1>Welcome to My AI Photo Generator</h1>
+    
+    <section class="prompt-enhancer">
+    <h2>🪄 AI Prompt Enhancer</h2>
+
+    <input
+        type="text"
+        id="enhanceInput"
+        placeholder="Enter a simple idea..."
+    >
+
+    <button id="enhanceBtn">
+        ✨ Enhance Prompt
+    </button>
+
+    <div id="enhancedResult" style="display:none;">
+        <h3>Enhanced Prompt</h3>
+
+        <p id="enhancedText"></p>
+
+        <button id="copyEnhancedBtn">
+            📋 Copy
+        </button>
+    </div>
+
+</section>
     <p>Designed & Developed by Aditya</p>
 
     <p>Turn your imagination into AI-generated art.</p>
@@ -31,6 +57,34 @@
   id="prompt"
   placeholder="Enter your image prompt..."
 >
+<div class="image-to-image">
+    <h3>🪄 Transform Your Image</h3>
+
+    <input
+        type="file"
+        id="imageUpload"
+        accept="image/*"
+    >
+
+    <img
+        id="previewImage"
+        src=""
+        alt="Image Preview"
+        style="display:none;"
+    >
+
+    <input
+        type="text"
+        id="imagePrompt"
+        placeholder="Describe how you want to transform the image..."
+    >
+
+    <button id="transformBtn">
+        ✨ Transform Image
+    </button>
+
+    <p id="transformStatus"></p>
+</div>
 <select id="style">
     <option value="">Realistic</option>
     <option value="anime">Anime</option>
@@ -48,6 +102,10 @@
     <button id="copyBtn">📋 Copy Prompt</button>
     <button id="clearBtn">🗑️ Clear Image</button>
     </div>
+    <div class="prompt-enhancer">
+
+    
+        
     <div id="loader" style="display:none;">
         <div class="spinner"></div>
     <h3>⏳ Generating AI Image...</h3>
@@ -62,11 +120,175 @@
     <h3>🖼️ Image History</h3>
 <div id="history"></div>
     <button id="downloadBtn">Download Image</button>
-    <script type="module" src="script.js?v=2"></script>
+    
+<section class="ai-story">
+
+    <h2>🤖 The Story of Artificial Intelligence</h2>
+
+    <p>
+        Artificial Intelligence, यानी AI, ऐसी technology है जो computers को
+        information समझने, सीखने और नए results बनाने में मदद करती है।
+    </p>
+
+    <div class="story-card">
+        <h3>🧠 AI कैसे काम करता है?</h3>
+        <p>
+            AI data और advanced algorithms की मदद से patterns को पहचानता है।
+            इसी learning के आधार पर AI text, images और कई दूसरी चीजें generate कर सकता है।
+        </p>
+    </div>
+
+    <div class="story-card">
+        <h3>🎨 AI Images कैसे बनती हैं?</h3>
+        <p>
+            जब आप कोई prompt लिखते हैं, AI उस description को समझकर उसके आधार पर
+            एक नई image तैयार करता है।
+        </p>
+    </div>
+
+    <div class="story-card">
+        <h3>🚀 AI का Future</h3>
+        <p>
+            आने वाले समय में AI education, science, design, entertainment और
+            technology जैसे कई क्षेत्रों में नई possibilities create कर सकता है।
+        </p>
+    </div>
+
+    <div class="story-card">
+        <h3>✨ Aditya AI Photo Generator</h3>
+        <p>
+            इस project का उद्देश्य simple है—आप अपने imagination को एक prompt में
+            लिखें और AI उसे एक image में बदल दे।
+        </p>
+    </div>
+
+</section>
+<section class="how-it-works">
+
+    <h2>⚡ How It Works</h2>
+
+    <div class="steps">
+
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>✍️ Write a Prompt</h3>
+            <p>
+                अपने imagination को simple words में लिखें।
+            </p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>🤖 AI Creates</h3>
+            <p>
+                AI आपके prompt को समझकर image generate करता है।
+            </p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>⬇️ Download</h3>
+            <p>
+                अपनी generated image को save और download करें।
+            </p>
+        </div>
+
+    </div>
+
+</section>
+<section class="ai-features">
+
+    <h2>✨ AI Features</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">📸</div>
+            <h3>Realistic</h3>
+            <p>Natural aur realistic AI images generate karein.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Anime</h3>
+            <p>Apne ideas ko beautiful anime style me badlein.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🧸</div>
+            <h3>Cartoon</h3>
+            <p>Fun aur creative cartoon images create karein.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🧊</div>
+            <h3>3D</h3>
+            <p>Stylish aur detailed 3D visuals generate karein.</p>
+        </div>
+
+    </div>
+
+</section>
+<section class="why-ai">
+
+    <h2>🚀 Why Choose Aditya AI?</h2>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h3>Fast Generation</h3>
+            <p>Apne ideas ko quickly AI images mein transform karein.</p>
+        </div>
+
+        <div class="why-card">
+            <div class="why-icon">🎯</div>
+            <h3>Easy to Use</h3>
+            <p>Simple prompt likhiye aur AI ko apna image create karne dein.</p>
+        </div>
+
+        <div class="why-card">
+            <div class="why-icon">🔐</div>
+            <h3>Personal History</h3>
+            <p>Login karke apni generated images ki history access karein.</p>
+        </div>
+
+    </div>
+
+</section>
+<section class="prompt-examples">
+
+    <h2>💡 Prompt Ideas</h2>
+
+    <div class="prompt-grid">
+
+        <div class="prompt-card">
+            <span>🌆</span>
+            <h3>City Night</h3>
+            <p>“A futuristic city at night, neon lights, cinematic view”</p>
+        </div>
+
+        <div class="prompt-card">
+            <span>🏔️</span>
+            <h3>Mountain</h3>
+            <p>“Beautiful mountain landscape, sunset, realistic photography”</p>
+        </div>
+
+        <div class="prompt-card">
+            <span>🚀</span>
+            <h3>Space</h3>
+            <p>“Astronaut exploring a mysterious planet, cinematic 3D art”</p>
+        </div>
+
+    </div>
+
+</section>
 
 <footer>
     <p>© 2026 Aditya | AI Photo Generator</p>
 </footer>
+
 </div>
+<script type="module" src="script.js?v=2"></script>
 </body>
 </html>

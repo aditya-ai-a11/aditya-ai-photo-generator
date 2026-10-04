@@ -262,20 +262,15 @@ downloadBtn.addEventListener("click", function () {
 // ===============================
 
 themeBtn.addEventListener("click", function () {
+  document.body.classList.toggle("light");
 
-  document.body.classList.toggle("dark");
-
-  if (document.body.classList.contains("dark")) {
-
-    themeBtn.innerText = "☀️ Light Mode";
-
-  } else {
-
+  if (document.body.classList.contains("light")) {
     themeBtn.innerText = "🌙 Dark Mode";
-
+  } else {
+    themeBtn.innerText = "☀️ Light Mode";
   }
-
 });
+
 
 
 // ===============================
@@ -457,4 +452,93 @@ onAuthStateChanged(auth, async function (user) {
 
   }
 
+});
+document.addEventListener("DOMContentLoaded", function () {
+
+    const imageUpload = document.getElementById("imageUpload");
+    const previewImage = document.getElementById("previewImage");
+
+    imageUpload.addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) {
+            previewImage.style.display = "none";
+            return;
+        }
+
+        const imageURL = URL.createObjectURL(file);
+
+        previewImage.src = imageURL;
+        previewImage.style.display = "block";
+    });
+
+});
+const imageUpload = document.getElementById("imageUpload");
+const previewImage = document.getElementById("previewImage");
+const transformBtn = document.getElementById("transformBtn");
+const imagePrompt = document.getElementById("imagePrompt");
+const transformStatus = document.getElementById("transformStatus");
+
+if (imageUpload) {
+    imageUpload.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (!file) return;
+
+        previewImage.src = URL.createObjectURL(file);
+        previewImage.style.display = "block";
+    });
+}
+
+if (transformBtn) {
+    transformBtn.addEventListener("click", function () {
+        if (!imageUpload.files[0]) {
+            transformStatus.innerText = "⚠️ Please select an image first.";
+            return;
+        }
+
+        if (!imagePrompt.value.trim()) {
+            transformStatus.innerText = "⚠️ Please enter a transformation prompt.";
+            return;
+        }
+
+        transformStatus.innerText =
+            "🪄 Image-to-Image feature is ready. Backend connection is next.";
+    });
+}
+const enhanceInput = document.getElementById("enhanceInput");
+const enhanceBtn = document.getElementById("enhanceBtn");
+const enhancedResult = document.getElementById("enhancedResult");
+const enhancedText = document.getElementById("enhancedText");
+const copyEnhancedBtn = document.getElementById("copyEnhancedBtn");
+
+enhanceBtn.addEventListener("click", function () {
+
+    const idea = enhanceInput.value.trim();
+
+    if (!idea) {
+        enhancedText.innerText = "⚠️ Please enter an idea first.";
+        enhancedResult.style.display = "block";
+        return;
+    }
+
+    const enhancedPrompt =
+        `${idea}, highly detailed, cinematic composition, realistic lighting, `
+        + `sharp focus, professional photography, rich colors, beautiful background, `
+        + `ultra detailed, high quality, 4K`;
+
+    enhancedText.innerText = enhancedPrompt;
+    enhancedResult.style.display = "block";
+});
+
+copyEnhancedBtn.addEventListener("click", async function () {
+
+    await navigator.clipboard.writeText(enhancedText.innerText);
+
+    copyEnhancedBtn.innerText = "✅ Copied!";
+
+    setTimeout(() => {
+        copyEnhancedBtn.innerText = "📋 Copy";
+    }, 1500);
 });
