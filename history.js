@@ -33,6 +33,7 @@ export async function loadHistory() {
 
     const img = document.createElement("img");
 
+
     img.src = data.imageUrl;
     img.width = 120;
     img.height = 120;
