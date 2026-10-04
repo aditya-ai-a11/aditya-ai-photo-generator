@@ -78,8 +78,18 @@ downloadBtn.addEventListener("click", () => {
       outputImage.src = data.imageUrl;
       outputImage.style.display = "block";
     });
-history.appendChild(favoriteBtn);
-history.appendChild(downloadBtn);
+const card = document.createElement("div");
+
+card.style.textAlign = "center";
+card.style.padding = "10px";
+card.style.borderRadius = "15px";
+card.style.background = "rgba(255,255,255,0.05)";
+
+card.appendChild(img);
+card.appendChild(favoriteBtn);
+card.appendChild(downloadBtn);
+
+history.prepend(card);
     history.prepend(img);
   });
 }
