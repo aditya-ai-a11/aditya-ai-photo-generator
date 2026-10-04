@@ -40,6 +40,24 @@ export async function loadHistory() {
     img.style.margin = "5px";
     img.style.objectFit = "cover";
     img.style.cursor = "pointer";
+    const downloadBtn = document.createElement("button");
+
+downloadBtn.innerText = "⬇️ Download";
+
+downloadBtn.style.display = "block";
+downloadBtn.style.margin = "5px auto 15px";
+downloadBtn.style.padding = "7px 12px";
+downloadBtn.style.border = "none";
+downloadBtn.style.borderRadius = "8px";
+downloadBtn.style.cursor = "pointer";
+
+downloadBtn.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = data.imageUrl;
+    link.download = "aditya-ai-image.jpg";
+    link.target = "_blank";
+    link.click();
+});
 
     img.addEventListener("click", () => {
       const outputImage = document.getElementById("outputImage");
